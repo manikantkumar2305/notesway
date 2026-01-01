@@ -61,6 +61,14 @@ chainlit.md
 # Deployment
 .vercel
 
+# Environment variables
+.env
+.env.*
+backend/.env
+frontend/.env
+backend/.env.*
+frontend/.env.*
+
 # Data and databases
 agenthub/agents/youtube/db
 
@@ -77,4 +85,4 @@ agenthub/agents/youtube/db
 .cache/
 
 # Mobile development
-android-sdk/ 
+android-sdk/ frontend/node_modules/.cache/default-development/0.pack
