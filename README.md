@@ -61,7 +61,7 @@ NotesWay is built using a **three-tier architecture**:
 ### Database
 - MongoDB Atlas
 
-### Cloud & DevOps
+### Cloud
 - Amazon EC2
 - Amazon S3
 - Amazon Cloudfront
