@@ -30,7 +30,6 @@ NotesWay is built using a **three-tier architecture**:
 - Secure API communication
 
 ### 2. Application Layer
-- Node.js with Express.js
 - RESTful API architecture
 - JWT-based authentication
 - Role-based access control
