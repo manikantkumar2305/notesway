@@ -1,0 +1,356 @@
+.navbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbarContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary);
+  padding: 8px;
+  transition: var(--transition);
+}
+
+.hamburger:hover {
+  color: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.logoImage {
+  height: 180px;
+  width: auto;
+  max-width: 600px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.userIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 20px;
+  transition: all 0.2s ease;
+  border: 2px solid #000000;
+}
+
+.userIcon:hover {
+  background: rgba(212, 232, 235, 0.3);
+  transform: scale(1.05);
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #EF4444;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+.avatarLetter {
+  position: relative;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  z-index: 10;
+  line-height: 1;
+  transition: opacity 0.2s ease;
+}
+
+.avatar:hover .avatarLetter {
+  opacity: 0;
+}
+
+.cameraIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.avatar:hover .cameraIcon {
+  opacity: 1;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+.userNameCenter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.userNameText {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.userNameText:hover {
+  color: var(--primary);
+}
+
+.userName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.userName:hover {
+  color: var(--text-primary);
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+  justify-content: center;
+}
+
+.badgePrimary {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+}
+
+.badgeSuccess {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.badgeError {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+}
+
+.dividerVertical {
+  width: 1px;
+  height: 40px;
+  background: var(--gray-200);
+}
+
+.collegeInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 16px;
+  background: var(--bg-hover);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.collegeIcon {
+  color: var(--primary);
+}
+
+.logoutBtn {
+  padding: 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoutBtn:hover {
+  background: var(--bg-hover);
+  color: var(--error);
+}
+
+@media (max-width: 1024px) {
+  .navbarContainer {
+    padding: 0 var(--space-md);
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .navRight {
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbarContainer {
+    height: 60px;
+    padding: 0 var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .hamburger {
+    display: flex;
+    order: -1;
+  }
+
+  .logo {
+    font-size: 16px;
+    gap: var(--space-sm);
+  }
+
+  .logo svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .collegeInfo span {
+    display: none;
+  }
+
+  .userDetails {
+    display: none;
+  }
+
+  .navRight {
+    gap: var(--space-sm);
+  }
+
+  .userInfo {
+    gap: var(--space-sm);
+  }
+
+  .userName,
+  .userRole {
+    display: none;
+  }
+
+  .userIcon,
+  .avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .logoutBtn {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbarContainer {
+    height: 55px;
+    padding: 0 var(--space-sm);
+  }
+
+  .logo {
+    font-size: 14px;
+  }
+
+  .logo svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .navRight {
+    gap: 6px;
+  }
+
+  .userIcon,
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    border-width: 1px;
+  }
+
+  .logoutBtn {
+    padding: 6px;
+  }
+}

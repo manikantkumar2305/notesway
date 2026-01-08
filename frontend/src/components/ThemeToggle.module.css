@@ -1,0 +1,56 @@
+.toggle {
+  background: none;
+  border: 2px solid var(--gray-300);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.toggle:hover {
+  background: var(--gray-100);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: scale(1.05);
+}
+
+.toggle:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  transition: transform 0.3s ease;
+}
+
+.toggle:hover .icon {
+  transform: rotate(20deg);
+}
+
+/* Dark mode specific styles */
+[data-theme='dark'] .toggle {
+  border-color: var(--gray-600);
+  color: var(--text-secondary);
+}
+
+[data-theme='dark'] .toggle:hover {
+  background: var(--gray-800);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+@media (max-width: 640px) {
+  .toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -1,0 +1,200 @@
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  border-right: 1px solid var(--gray-200);
+  height: calc(100vh - 70px);
+  position: sticky;
+  top: 70px;
+  overflow-y: auto;
+}
+
+.nav {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: #0f3155;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  background: transparent;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  border: 1px solid transparent;
+}
+
+.navItem:hover {
+  background: #eaf3ff;
+  color: #0b63c5;
+  border-color: #d7e6ff;
+  box-shadow: 0 8px 16px rgba(12, 68, 130, 0.08);
+  transform: translateY(-1px);
+}
+
+.navItemActive {
+  background: linear-gradient(135deg, #1d8af0, #136fce);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(19, 111, 206, 0.25);
+}
+
+.navItemActive svg {
+  color: #ffffff;
+}
+
+.navItem:focus-visible {
+  outline: 2px solid rgba(29, 138, 240, 0.4);
+  outline-offset: 2px;
+}
+
+.navItem svg {
+  color: inherit;
+}
+
+/* Overlay for mobile */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 97;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Close button inside sidebar */
+.closeBtn {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 6px;
+  z-index: 1001;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  color: var(--primary);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 70px;
+  }
+
+  .navItem span {
+    display: none;
+  }
+
+  .navItem {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 260px;
+    height: calc(100vh - 70px);
+    background: var(--white);
+    border-right: 1px solid var(--gray-200);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+  }
+
+  .nav {
+    padding: 60px var(--space-md) var(--space-lg) var(--space-md);
+  }
+
+  .navItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: 12px 16px;
+  }
+
+  .navItem span {
+    display: inline;
+  }
+
+  .closeBtn {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 240px;
+  }
+
+  .hamburger {
+    left: 12px;
+    top: 12px;
+  }
+
+  .hamburger span {
+    width: 22px;
+    height: 2.5px;
+  }
+
+  .navItem {
+    padding: 10px 14px;
+    font-size: 14px;
+    gap: var(--space-sm);
+  }
+
+  .nav {
+    padding: 55px var(--space-md) var(--space-md) var(--space-md);
+  }
+
+  .closeBtn {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+  }
+}
