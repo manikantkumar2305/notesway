@@ -1,121 +1,148 @@
 # NotesWay – Academic Notes Management Platform
 
+NotesWay is a production-grade, cloud-native academic notes management platform for students, professors, and educational institutions. It provides secure upload, organization, sharing, and retrieval of academic resources, built on a fully managed AWS 3-tier architecture with a strong focus on scalability, security, and observability.
 
-## Project Summary
-**NotesWay** is a production-ready, cloud-hosted academic notes management platform designed for students, professors, and educational institutions. The application enables secure uploading, organization, sharing, and downloading of academic resources with a strong emphasis on scalability, security, and real-world deployment practices.
 
 ---
 
-## Live Deployment
-- **Frontend:** https://notesway.in  
-- **Backend API:** https://api.notesway.in  
+## Architecture Overview
+
+NotesWay follows a **3-tier cloud architecture** on AWS, split into a Presentation Tier, Application Tier, and Data/Infrastructure Tier, fronted by DNS and edge security, and backed by fully managed cloud services for storage, notifications, monitoring, and backups.
+
+<img width="1536" height="1024" alt="notesway-arc" src="https://github.com/user-attachments/assets/5ad8580c-b08a-44ff-adb2-8bd360f71db2" />
+
+
+### 1. Presentation Tier — `notesway.in`
+- **Amazon CloudFront (CDN)** — serves the React frontend globally with low latency and edge caching.
+- **Amazon S3 (Static Website Hosting)** — hosts the built React application (HTML/CSS/JS assets).
+
+### 2. Application Tier — `api.notesway.in`
+- **AWS WAF** — filters malicious traffic and protects against common web exploits (SQLi, XSS, bots) before requests reach the application.
+- **Application Load Balancer (ALB)** — distributes incoming API traffic, terminates SSL/TLS, and routes requests into the VPC.
+- **Amazon VPC (`10.0.0.0/16`)** — isolated network boundary for all compute resources.
+  - **Public Subnet (`10.0.1.0/24`)**
+    - **Amazon EC2 Instance** (Elastic IP-backed, static public IP)
+      - **Docker Container** running the **NotesWay Backend (FastAPI)** — containerized for consistent, reproducible deployments.
+  - **Internet Gateway** — enables inbound/outbound internet connectivity for the public subnet.
+  - **Elastic IP** — guarantees a static public IP for the EC2 instance across restarts.
+
+### 3. Data & Infrastructure Tier
+- **MongoDB Atlas (Cluster)** — managed NoSQL database storing the NotesWay application data.
+- **Amazon S3 (Notes & Files)** + **S3 Pre-signed URLs** — secure, time-limited, direct-to-client file upload/download without exposing the bucket publicly.
+- **Amazon SES → Amazon SNS** — transactional email delivery and push/event notifications.
+- **Amazon CloudWatch → CloudWatch Logs** — centralized metrics, application logs, and alerting.
+- **Amazon S3 (Backups)** — scheduled backups for disaster recovery.
+
+### Security & Management (Cross-Cutting)
+- **AWS IAM** — least-privilege roles and policies for all services and compute resources.
+- **AWS Security Groups** — stateful, instance-level firewall rules controlling inbound/outbound traffic.
+- **AWS Certificate Manager (ACM)** — provisions and auto-renews SSL/TLS certificates for HTTPS on both domains.
+- **Network ACLs** — stateless, subnet-level traffic filtering as a defense-in-depth layer.
 
 ---
 
 ## Objectives
-- Build a centralized platform for managing academic notes
-- Implement secure authentication and authorization mechanisms
-- Enable efficient file storage and retrieval using cloud services
-- Deploy a scalable and production-grade web application
-- Follow industry-standard DevOps and security practices
 
----
-
-## System Architecture
-NotesWay is built using a **three-tier architecture**:
-
-### 1. Presentation Layer
-- React.js-based frontend
-- Responsive and user-friendly interface
-- Secure API communication
-
-### 2. Application Layer
-- RESTful API architecture
-- JWT-based authentication
-- Role-based access control
-
-### 3. Data & Infrastructure Layer
-- MongoDB Atlas for database management
-- AWS S3 for file storage
-- AWS EC2 for backend hosting
-- Nginx as a reverse proxy and load handler
-- HTTPS-enabled custom domain
+- Build a centralized, cloud-hosted platform for managing academic notes
+- Implement secure authentication and role-based authorization
+- Enable efficient, scalable file storage and retrieval via AWS S3 with pre-signed URLs
+- Deploy a fault-tolerant, horizontally scalable 3-tier architecture on AWS
+- Apply production-grade DevOps practices: containerization, load balancing, WAF, monitoring, and automated backups
 
 ---
 
 ## Technology Stack
 
-### Frontend
+**Frontend**
 - React.js
 - CSS Modules
 - Axios
 - React Router
+- Amazon CloudFront (CDN) + Amazon S3 (static hosting)
 
-### Backend
-- Python
-- RESTful APIs
-- JWT authentication
-- Secure file handling with AWS S3
+**Backend**
+- Python (FastAPI)
+- Docker (containerized deployment)
+- JWT-based authentication
+- RESTful API design
+- Amazon EC2 (compute) + Application Load Balancer
 
-### Database
-- MongoDB Atlas
+**Database**
+- MongoDB Atlas (managed cluster)
 
-### Cloud
-- Amazon EC2
-- Amazon S3
-- Amazon Cloudfront
-- AWS IAM
-- AWS Security Groups
-- Nginx
-- PM2 Process Manager
-- Git & GitHub
+**Cloud & Infrastructure (AWS)**
+- Amazon Route 53 (DNS)
+- Amazon CloudFront (CDN)
+- Amazon S3 (static hosting, file storage, backups)
+- AWS WAF (web application firewall)
+- Application Load Balancer (ALB)
+- Amazon VPC, Public Subnet, Internet Gateway, Elastic IP
+- Amazon EC2 + Docker
+- Amazon SES / Amazon SNS (email & notifications)
+- Amazon CloudWatch (monitoring & logging)
+- AWS IAM, Security Groups, Network ACLs
+- AWS Certificate Manager (SSL/TLS)
+
+**DevOps & Tooling**
+- Git & GitHub (version control)
+- Docker (containerization)
+- CI/CD-ready deployment pipeline
+- Infrastructure secured via IAM, Security Groups, and NACLs
 
 ---
 
 ## Core Features
-- User registration and authentication
+
+- Secure user registration, authentication, and JWT-based session management
 - Role-based dashboards (Student, Professor, College)
-- Secure file upload and download
-- Cloud-based file storage using AWS S3
-- Note sharing functionality
-- Production-ready API deployment
-- Domain and SSL configuration
+- Secure file upload/download using S3 pre-signed URLs
+- Cloud-native, containerized backend for consistent deployments
+- Note sharing and organization
+- WAF-protected, load-balanced, highly available API
+- Automated email/notification pipeline (SES + SNS)
+- Centralized logging and monitoring (CloudWatch)
+- Scheduled S3 backups for disaster recovery
 
 ---
 
 ## Security Implementation
-- JWT-based authentication and authorization
-- Secure handling of environment variables
-- CORS configuration for controlled access
-- HTTPS enforcement using SSL certificates
-- Access-restricted APIs and file resources
+
+- **Edge protection:** AWS WAF filters malicious traffic before it reaches the application
+- **Transport security:** HTTPS enforced end-to-end via AWS Certificate Manager (ACM)
+- **Network isolation:** Custom VPC with public subnet, Internet Gateway, and Elastic IP
+- **Access control:** Security Groups (instance-level) + Network ACLs (subnet-level) as layered firewalls
+- **Identity & permissions:** AWS IAM roles and policies following least-privilege principles
+- **Application security:** JWT-based authentication/authorization, CORS configuration, secure environment variable handling
+- **File security:** Time-limited S3 pre-signed URLs instead of public bucket access
 
 ---
 
 ## Deployment Workflow
-1. Source code managed using GitHub
-2. Backend deployed on AWS EC2
-3. Nginx configured as reverse proxy
-4. Static and file assets stored in AWS S3
-5. Domain configured with SSL
-6. PM2 used for backend process management
+
+1. Source code managed and versioned via GitHub
+2. Backend containerized using Docker and deployed to an EC2 instance within a VPC public subnet
+3. Traffic secured with AWS WAF and distributed via an Application Load Balancer
+4. Frontend built and deployed to S3, distributed globally via CloudFront
+5. Domains (`notesway.in`, `api.notesway.in`) configured through Route 53 with ACM-issued SSL certificates
+6. MongoDB Atlas provisioned as the managed database layer
+7. CloudWatch configured for application/infrastructure monitoring and logging
+8. Automated backups configured to Amazon S3
 
 ---
 
 ## Scalability & Performance
-- Stateless REST APIs
-- Cloud-native storage architecture
-- Optimized backend routes
-- Ready for horizontal scaling
-- CDN-compatible setup
+
+- Stateless REST APIs enable horizontal scaling behind the ALB
+- Containerized backend (Docker) allows consistent, repeatable scaling across EC2 instances
+- CloudFront CDN reduces latency and offloads static asset delivery globally
+- S3 pre-signed URLs offload file transfer directly between client and storage, reducing backend load
+- CloudWatch-driven monitoring supports proactive scaling and incident response
+- Architecture is ready for Auto Scaling Groups and multi-AZ expansion
 
 ---
 
 ## Author
-**Manikant Kumar**  
-Cloud Engineer 
 
----
+**Manikant Kumar**
+Cloud Engineer
 
-## License
-This project is intended for educational, portfolio, and demonstration purposes.
