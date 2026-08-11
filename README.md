@@ -12,11 +12,11 @@ NotesWay follows a **3-tier cloud architecture** on AWS, split into a Presentati
 <img width="1536" height="1024" alt="notesway-arc" src="https://github.com/user-attachments/assets/5ad8580c-b08a-44ff-adb2-8bd360f71db2" />
 
 
-### 1. Presentation Tier — `notesway.in`
+### 1. Presentation Tier — 
 - **Amazon CloudFront (CDN)** — serves the React frontend globally with low latency and edge caching.
 - **Amazon S3 (Static Website Hosting)** — hosts the built React application (HTML/CSS/JS assets).
 
-### 2. Application Tier — `api.notesway.in`
+### 2. Application Tier — 
 - **AWS WAF** — filters malicious traffic and protects against common web exploits (SQLi, XSS, bots) before requests reach the application.
 - **Application Load Balancer (ALB)** — distributes incoming API traffic, terminates SSL/TLS, and routes requests into the VPC.
 - **Amazon VPC (`10.0.0.0/16`)** — isolated network boundary for all compute resources.
